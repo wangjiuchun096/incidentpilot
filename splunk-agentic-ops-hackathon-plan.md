@@ -111,10 +111,13 @@ opsagent-lab/
 - [x] 确定项目名称：IncidentPilot
 - [x] 确定核心 demo 流程
 - [x] 创建本地 Git 仓库
-- [ ] 创建 GitHub 远程仓库
+- [x] 创建 GitHub 远程仓库
 - [x] 写下 README 初稿
 
-备注：当前 GitHub CLI 尚未登录，远程仓库需要登录后创建。
+备注：
+
+- GitHub 仓库：https://github.com/wangjiuchun096/incidentpilot
+- 初始提交：`9bbbd0b docs(hackathon): 初始化 IncidentPilot 参赛计划`
 
 2026-05-14：
 
