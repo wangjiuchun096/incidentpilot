@@ -1,0 +1,16 @@
+2026-05-13T09:41:02.118Z INFO checkout-api service=checkout-api host=api-07 request_id=req-72a1 route=/checkout method=POST status=200 latency_ms=184
+2026-05-13T09:41:04.905Z WARN checkout-api service=checkout-api host=api-07 request_id=req-72a8 route=/checkout method=POST status=200 latency_ms=938 message="slow request detected"
+2026-05-13T09:41:07.332Z INFO payment-worker service=payment-worker host=worker-03 job=charge-card status=success latency_ms=322
+2026-05-13T09:41:11.441Z WARN checkout-api service=checkout-api host=api-08 component=db message="HikariPool-1 - Thread starvation or clock leap detected"
+2026-05-13T09:41:13.219Z ERROR checkout-api service=checkout-api host=api-07 request_id=req-72bf route=/checkout method=POST status=500 latency_ms=30042 error="SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms"
+2026-05-13T09:41:14.010Z WARN checkout-api service=checkout-api host=api-08 component=db pool=HikariPool-1 active=50 idle=0 waiting=31 max=50 message="connection pool saturated"
+2026-05-13T09:41:16.553Z INFO catalog-api service=catalog-api host=api-02 route=/products method=GET status=200 latency_ms=92
+2026-05-13T09:41:18.722Z ERROR checkout-api service=checkout-api host=api-07 request_id=req-72ca route=/checkout method=POST status=500 latency_ms=30037 error="SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms"
+2026-05-13T09:41:21.401Z WARN postgres-primary service=postgres-primary host=db-01 metric=connections value=498 max=500 message="database connection count near limit"
+2026-05-13T09:41:23.880Z WARN checkout-api service=checkout-api host=api-08 component=http route=/checkout error_rate_5m=18.4 message="error rate above threshold"
+2026-05-13T09:41:25.119Z ERROR checkout-api service=checkout-api host=api-08 request_id=req-72e1 route=/checkout method=POST status=500 latency_ms=30051 error="could not acquire JDBC connection"
+2026-05-13T09:41:28.633Z INFO auth-api service=auth-api host=api-01 route=/session method=GET status=200 latency_ms=44
+2026-05-13T09:41:31.004Z WARN checkout-api service=checkout-api host=api-07 component=db query="select * from carts where user_id=?" duration_ms=11884 message="slow query"
+2026-05-13T09:41:35.774Z ERROR checkout-api service=checkout-api host=api-07 request_id=req-72fd route=/checkout method=POST status=500 latency_ms=30049 error="SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms"
+2026-05-13T09:41:39.112Z WARN checkout-api service=checkout-api host=api-08 component=db pool=HikariPool-1 active=50 idle=0 waiting=46 max=50 message="connection pool saturated"
+
