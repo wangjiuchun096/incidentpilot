@@ -121,21 +121,43 @@ opsagent-lab/
 
 2026-05-14：
 
-- 初始化 Next.js 项目
-- 配置 Tailwind
-- 搭建基础页面结构
-- 准备 3 份样例日志
+- [x] 初始化 Next.js 项目
+- [x] 配置 Tailwind
+- [x] 搭建基础页面结构
+- [x] 准备 3 份样例日志（db-connection-pool-exhaustion.log 已完成）
 
-2026-05-15：
+备注：
 
-- 设计事故分析 JSON schema
-- 编写第一版 AI prompt
-- 实现 mock 分析结果渲染
+- 项目骨架已创建，包含 app/incidents、app/dashboard、app/reports 页面
+- 使用 Base UI 组件库替代 shadcn/ui
+- 修复了 useSearchParams Suspense boundary 问题
 
-2026-05-16：
+2026-05-15：（提前完成）
 
-- 接入第一个 LLM API
-- 完成“粘贴日志 -> AI 分析 -> 页面展示”闭环
+- [x] 设计事故分析 JSON schema
+- [x] 编写第一版 AI prompt
+- [x] 实现 mock 分析结果渲染
+- [x] 创建 API route（支持 OpenAI/Anthropic）
+
+备注：
+
+- `lib/incidents/types.ts` 定义了 `IncidentAnalysis` 接口
+- `lib/ai/prompts.ts` 包含完整的分析 prompt
+- `app/api/analyze/route.ts` 实现 LLM API 调用
+- incidents page 已支持调用真实 API，自动降级到 mock
+
+2026-05-16：（已完成）
+
+- [x] 接入 OpenRouter API（支持 DeepSeek 模型）
+- [x] 完成”粘贴日志 -> AI 分析 -> 页面展示”闭环
+- [x] 修复 JSON 解析问题，支持 markdown 格式返回
+
+备注：
+
+- 使用 OpenRouter 作为 AI API 提供商，支持多种模型
+- 当前使用 `deepseek/deepseek-v4-flash` 模型
+- 简化 prompt 为英文，解决中文编码问题
+- 增强 `parseAnalysisResponse` 支持从 markdown 中提取 JSON
 
 2026-05-17：
 

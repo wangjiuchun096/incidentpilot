@@ -20,14 +20,16 @@ export default function Home() {
             {t("home.subtitle")}
           </p>
           <div className="flex justify-center gap-4">
-            <Button asChild size="lg">
-              <Link href="/incidents">
+            <Link href="/incidents">
+              <Button size="lg">
                 {t("home.startAnalysis")} <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/dashboard">{t("home.viewDashboard")}</Link>
-            </Button>
+              </Button>
+            </Link>
+            <Link href="/dashboard">
+              <Button variant="outline" size="lg">
+                {t("home.viewDashboard")}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
