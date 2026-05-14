@@ -1,0 +1,25 @@
+2026-05-14T10:30:00.000Z [deployment] INFO: Starting deployment of api-service v2.1.3 to production
+2026-05-14T10:30:01.234Z [k8s] INFO: Rolling update initiated for deployment/api-service
+2026-05-14T10:30:05.567Z [api-service] INFO: Starting container with image: registry.example.com/api-service:v2.1.3
+2026-05-14T10:30:06.123Z [api-service] ERROR: Failed to load configuration - missing required environment variable: DATABASE_URL
+2026-05-14T10:30:06.456Z [api-service] ERROR: Application startup failed - cannot connect to database
+2026-05-14T10:30:06.789Z [api-service] FATAL: No database connection string provided. Set DATABASE_URL environment variable.
+2026-05-14T10:30:07.012Z [k8s] WARN: Liveness probe failed - container will be restarted
+2026-05-14T10:30:07.234Z [k8s] INFO: Container api-service-7d8f9b-xk2pq terminated with exit code 1
+2026-05-14T10:30:08.456Z [k8s] INFO: Starting replacement container api-service-7d8f9b-yz4mn
+2026-05-14T10:30:09.789Z [api-service] ERROR: Failed to load configuration - missing required environment variable: DATABASE_URL
+2026-05-14T10:30:10.012Z [api-service] ERROR: Application startup failed - cannot connect to database
+2026-05-14T10:30:10.234Z [load-balancer] WARN: Target api-service:3000 marked as unhealthy
+2026-05-14T10:30:10.456Z [load-balancer] WARN: Removing api-service from rotation - 0/3 targets healthy
+2026-05-14T10:30:11.789Z [nginx] ERROR: Upstream connection failed - no available api-service backends
+2026-05-14T10:30:12.012Z [nginx] ERROR: 502 Bad Gateway - /api/users request failed
+2026-05-14T10:30:15.234Z [monitoring] ALERT: API service availability dropped below 95% - current: 0%
+2026-05-14T10:30:16.456Z [deployment] ERROR: Deployment failed - 3/3 pods failed liveness check
+2026-05-14T10:30:17.789Z [deployment] INFO: Rolling back to previous version v2.1.2
+2026-05-14T10:30:20.012Z [k8s] INFO: Scaling down new pods, scaling up previous version
+2026-05-14T10:30:25.456Z [api-service] INFO: Container api-service-v2.1.2-abc123 started successfully
+2026-05-14T10:30:26.789Z [api-service] INFO: Database connection established - api-service v2.1.2 running normally
+2026-05-14T10:30:27.012Z [load-balancer] INFO: Target api-service:3000 marked as healthy
+2026-05-14T10:30:28.234Z [nginx] INFO: Upstream restored - /api/users proxying to api-service:3000
+2026-05-14T10:30:30.456Z [monitoring] INFO: API service availability restored - 100%
+2026-05-14T10:31:00.789Z [deployment] ERROR: Deployment rolled back - missing DATABASE_URL in new version's ConfigMap

@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "首页",
+    "incidents": "事故分析",
+    "reports": "报告",
+    "dashboard": "仪表盘"
+  },
+  "home": {
+    "title": "快速定位根因，加速事故复盘",
+    "subtitle": "IncidentPilot 将原始可观测数据（日志、告警、错误堆栈）转换为结构化的事故分析报告，包括根因假设、证据映射、排查步骤和 postmortem 草稿。",
+    "startAnalysis": "开始分析",
+    "viewDashboard": "查看仪表盘",
+    "features": "核心功能",
+    "quickStart": "快速开始",
+    "selectSample": "选择样例日志，体验完整分析流程"
+  },
+  "features": {
+    "logAnalysis": {
+      "title": "日志分析",
+      "desc": "粘贴或上传日志，快速识别关键事件",
+      "detail": "支持多种日志格式，自动提取时间戳、服务名、错误信息等关键字段"
+    },
+    "rootCauseAnalysis": {
+      "title": "AI 根因分析",
+      "desc": "基于证据的根因假设和置信度",
+      "detail": "每项结论都附带对应的日志证据，支持可追溯的调试决策"
+    },
+    "quickPostmortem": {
+      "title": "快速复盘",
+      "desc": "一键生成 postmortem 草稿",
+      "detail": "自动生成符合标准的 Markdown 格式事故报告，减少复盘工作量"
+    }
+  },
+  "incidents": {
+    "title": "事故分析",
+    "subtitle": "粘贴日志内容或加载样例日志，AI 将分析事故原因并生成报告",
+    "logInput": "日志输入",
+    "pasteLogs": "粘贴日志内容...",
+    "analyze": "开始分析",
+    "analyzing": "分析中...",
+    "analysisResult": "分析结果",
+    "severity": "严重程度",
+    "confidence": "置信度",
+    "summary": "事故摘要",
+    "affectedServices": "受影响服务",
+    "rootCause": "根因分析",
+    "evidence": "证据",
+    "debugSteps": "排查步骤",
+    "recommendedFix": "修复建议",
+    "postmortemDraft": "Postmortem 草稿",
+    "copyMarkdown": "复制 Markdown",
+    "noResult": "粘贴日志后点击&quot;开始分析&quot;",
+    "loadSample": "加载样例"
+  },
+  "samples": {
+    "dbConnectionPool": "数据库连接池耗尽",
+    "redisTimeout": "Redis 超时",
+    "envMisconfig": "环境变量错误"
+  },
+  "severity": {
+    "high": "高",
+    "medium": "中",
+    "low": "低"
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "subtitle": "事故分析统计和系统健康概览",
+    "totalAnalyses": "总分析次数",
+    "thisWeek": "本周",
+    "highSeverity": "高严重事故",
+    "avgAnalysisTime": "平均分析时间",
+    "avgConfidence": "平均置信度",
+    "recentAnalyses": "最近分析",
+    "noData": "暂无数据"
+  },
+  "reports": {
+    "title": "事故报告",
+    "subtitle": "查看历史分析记录和生成的 postmortem 报告",
+    "noHistory": "暂无历史报告",
+    "noHistoryDetail": "完成事故分析后，报告将显示在这里"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "retry": "重试",
+    "cancel": "取消",
+    "confirm": "确认",
+    "copied": "已复制"
+  }
+}

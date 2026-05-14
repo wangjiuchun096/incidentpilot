@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "Home",
+    "incidents": "Incidents",
+    "reports": "Reports",
+    "dashboard": "Dashboard"
+  },
+  "home": {
+    "title": "Find Root Cause Fast, Speed Up Postmortems",
+    "subtitle": "IncidentPilot transforms raw observability data (logs, alerts, stack traces) into structured incident analysis reports, including root cause hypotheses, evidence mapping, debug steps, and postmortem drafts.",
+    "startAnalysis": "Start Analysis",
+    "viewDashboard": "View Dashboard",
+    "features": "Features",
+    "quickStart": "Quick Start",
+    "selectSample": "Select a sample log to experience the full analysis flow"
+  },
+  "features": {
+    "logAnalysis": {
+      "title": "Log Analysis",
+      "desc": "Paste or upload logs, quickly identify key events",
+      "detail": "Supports multiple log formats, automatically extracts timestamps, service names, error messages and other key fields"
+    },
+    "rootCauseAnalysis": {
+      "title": "AI Root Cause Analysis",
+      "desc": "Evidence-based root cause hypotheses with confidence scores",
+      "detail": "Each conclusion is accompanied by corresponding log evidence, supporting traceable debugging decisions"
+    },
+    "quickPostmortem": {
+      "title": "Quick Postmortem",
+      "desc": "Generate postmortem drafts with one click",
+      "detail": "Automatically generates standard Markdown format incident reports, reducing postmortem workload"
+    }
+  },
+  "incidents": {
+    "title": "Incident Analysis",
+    "subtitle": "Paste log content or load sample logs, AI will analyze the incident cause and generate reports",
+    "logInput": "Log Input",
+    "pasteLogs": "Paste log content...",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing...",
+    "analysisResult": "Analysis Result",
+    "severity": "Severity",
+    "confidence": "Confidence",
+    "summary": "Incident Summary",
+    "affectedServices": "Affected Services",
+    "rootCause": "Root Cause Analysis",
+    "evidence": "Evidence",
+    "debugSteps": "Debug Steps",
+    "recommendedFix": "Recommended Fix",
+    "postmortemDraft": "Postmortem Draft",
+    "copyMarkdown": "Copy Markdown",
+    "noResult": "Paste logs and click &quot;Analyze&quot;",
+    "loadSample": "Load Sample"
+  },
+  "samples": {
+    "dbConnectionPool": "DB Connection Pool Exhaustion",
+    "redisTimeout": "Redis Timeout",
+    "envMisconfig": "Env Variable Misconfig"
+  },
+  "severity": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Incident analysis statistics and system health overview",
+    "totalAnalyses": "Total Analyses",
+    "thisWeek": "This Week",
+    "highSeverity": "High Severity Incidents",
+    "avgAnalysisTime": "Avg Analysis Time",
+    "avgConfidence": "Avg Confidence",
+    "recentAnalyses": "Recent Analyses",
+    "noData": "No data"
+  },
+  "reports": {
+    "title": "Incident Reports",
+    "subtitle": "View historical analysis records and generated postmortem reports",
+    "noHistory": "No historical reports",
+    "noHistoryDetail": "Reports will appear here after completing incident analysis"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "copied": "Copied"
+  }
+}
