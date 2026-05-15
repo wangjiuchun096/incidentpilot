@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { buildAnalysisPrompt, parseAnalysisResponse } from "@/lib/ai/prompts";
+import { buildAnalysisPrompt, getSystemPrompt, parseAnalysisResponse } from "@/lib/ai/prompts";
 import { IncidentAnalysis } from "@/lib/incidents/types";
 
 export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   try {
-    const { logs } = await request.json();
+    const { logs, locale } = await request.json();
 
     if (!logs || typeof logs !== "string" || logs.trim().length === 0) {
       return NextResponse.json(
@@ -24,16 +24,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const prompt = buildAnalysisPrompt(logs);
+    const prompt = buildAnalysisPrompt(logs, locale);
+    const systemPrompt = getSystemPrompt(locale);
 
     let result: Partial<IncidentAnalysis>;
 
     if (process.env.OPENROUTER_API_KEY) {
-      result = await callOpenRouter(apiKey, prompt);
+      result = await callOpenRouter(apiKey, prompt, systemPrompt);
     } else if (process.env.ANTHROPIC_API_KEY) {
-      result = await callAnthropic(apiKey, prompt);
+      result = await callAnthropic(apiKey, prompt, systemPrompt);
     } else {
-      result = await callOpenAI(apiKey, prompt);
+      result = await callOpenAI(apiKey, prompt, systemPrompt);
     }
 
     const analysis: IncidentAnalysis = {
@@ -59,7 +60,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function callOpenAI(apiKey: string, prompt: string): Promise<Partial<IncidentAnalysis>> {
+async function callOpenAI(apiKey: string, prompt: string, systemPrompt: string): Promise<Partial<IncidentAnalysis>> {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -69,7 +70,7 @@ async function callOpenAI(apiKey: string, prompt: string): Promise<Partial<Incid
     body: JSON.stringify({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
       messages: [
-        { role: "system", content: "你是一个专业的 SRE 事故排查助手。" },
+        { role: "system", content: systemPrompt },
         { role: "user", content: prompt },
       ],
       temperature: 0.1,
@@ -86,7 +87,7 @@ async function callOpenAI(apiKey: string, prompt: string): Promise<Partial<Incid
   return parseAnalysisResponse(data.choices[0]?.message?.content || "{}");
 }
 
-async function callAnthropic(apiKey: string, prompt: string): Promise<Partial<IncidentAnalysis>> {
+async function callAnthropic(apiKey: string, prompt: string, systemPrompt: string): Promise<Partial<IncidentAnalysis>> {
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -97,6 +98,7 @@ async function callAnthropic(apiKey: string, prompt: string): Promise<Partial<In
     body: JSON.stringify({
       model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-20250514",
       max_tokens: 4096,
+      system: systemPrompt,
       messages: [
         { role: "user", content: prompt },
       ],
@@ -112,7 +114,7 @@ async function callAnthropic(apiKey: string, prompt: string): Promise<Partial<In
   return parseAnalysisResponse(data.content[0]?.text || "{}");
 }
 
-async function callOpenRouter(apiKey: string, prompt: string): Promise<Partial<IncidentAnalysis>> {
+async function callOpenRouter(apiKey: string, prompt: string, systemPrompt: string): Promise<Partial<IncidentAnalysis>> {
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -122,7 +124,7 @@ async function callOpenRouter(apiKey: string, prompt: string): Promise<Partial<I
     body: JSON.stringify({
       model: process.env.OPENROUTER_MODEL || "anthropic/claude-3-haiku",
       messages: [
-        { role: "system", content: "你是一个专业的 SRE 事故排查助手。" },
+        { role: "system", content: systemPrompt },
         { role: "user", content: prompt },
       ],
       temperature: 0.1,

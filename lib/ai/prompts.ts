@@ -50,14 +50,28 @@ export const INCIDENT_ANALYSIS_PROMPT = `你是一个专业的 SRE（Site Reliab
 - evidence 和 debugSteps 至少各返回 2 条
 - 如果无法从日志确定根因，probableRootCause 填写"无法从日志确定"，confidence 设置较低`;
 
-export const INCIDENT_ANALYSIS_USER_TEMPLATE = `Analyze the logs below and return ONLY this JSON format, no other text:
+export const INCIDENT_ANALYSIS_USER_TEMPLATE_ZH = `分析以下日志，只返回 JSON 格式，不要其他内容：
+{"summary":"一段话总结事故","severity":"high|medium|low","affectedServices":["受影响服务"],"probableRootCause":"根因分析","evidence":["证据1","证据2"],"debugSteps":["步骤1","步骤2"],"recommendedFix":"修复建议","postmortemDraft":"# 事故报告...","confidence":0.9}
+
+日志：
+{{logs}}`;
+
+export const INCIDENT_ANALYSIS_USER_TEMPLATE_EN = `Analyze the logs below and return ONLY this JSON format, no other text:
 {"summary":"brief summary","severity":"high|medium|low","affectedServices":["service1"],"probableRootCause":"root cause","evidence":["evidence1","evidence2"],"debugSteps":["step1","step2"],"recommendedFix":"fix recommendation","postmortemDraft":"# Postmortem...","confidence":0.9}
 
 Logs:
 {{logs}}`;
 
-export function buildAnalysisPrompt(logs: string): string {
-  return INCIDENT_ANALYSIS_USER_TEMPLATE.replace("{{logs}}", logs);
+export const INCIDENT_ANALYSIS_SYSTEM_ZH = "你是一个专业的 SRE（Site Reliability Engineer）事故排查助手。";
+export const INCIDENT_ANALYSIS_SYSTEM_EN = "You are a professional SRE (Site Reliability Engineer) incident investigation assistant.";
+
+export function buildAnalysisPrompt(logs: string, locale: string = "zh-CN"): string {
+  const template = locale === "en" ? INCIDENT_ANALYSIS_USER_TEMPLATE_EN : INCIDENT_ANALYSIS_USER_TEMPLATE_ZH;
+  return template.replace("{{logs}}", logs);
+}
+
+export function getSystemPrompt(locale: string = "zh-CN"): string {
+  return locale === "en" ? INCIDENT_ANALYSIS_SYSTEM_EN : INCIDENT_ANALYSIS_SYSTEM_ZH;
 }
 
 export function parseAnalysisResponse(content: string): Partial<IncidentAnalysis> {

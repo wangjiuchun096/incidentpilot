@@ -14,11 +14,11 @@ import { IncidentAnalysis } from "@/lib/incidents/types";
 import { useI18n } from "@/lib/i18n";
 import { AlertCircle, CheckCircle2, Clock, FileText, Loader2, Lightbulb, Zap } from "lucide-react";
 
-async function callAnalyzeAPI(logs: string): Promise<IncidentAnalysis> {
+async function callAnalyzeAPI(logs: string, locale: string): Promise<IncidentAnalysis> {
   const response = await fetch("/api/analyze", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ logs }),
+    body: JSON.stringify({ logs, locale }),
   });
 
   if (!response.ok) {
@@ -30,7 +30,7 @@ async function callAnalyzeAPI(logs: string): Promise<IncidentAnalysis> {
 }
 
 function IncidentsContent() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const searchParams = useSearchParams();
   const [logs, setLogs] = useState("");
   const [analyzing, setAnalyzing] = useState(false);
@@ -56,7 +56,7 @@ function IncidentsContent() {
     try {
       let analysis: IncidentAnalysis;
       try {
-        analysis = await callAnalyzeAPI(logs);
+        analysis = await callAnalyzeAPI(logs, locale);
       } catch {
         analysis = await analyzeIncident(logs);
       }

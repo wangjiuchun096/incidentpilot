@@ -48,9 +48,17 @@ The incident analysis returns a structured JSON:
   "evidence": ["Log excerpt 1", "Log excerpt 2"],
   "debugSteps": ["Step 1", "Step 2"],
   "recommendedFix": "Fix recommendation",
-  "postmortemDraft": "Markdown postmortem template"
+  "postmortemDraft": "Markdown postmortem template",
+  "confidence": 0.95
 }
 ```
+
+### AI 多语言支持
+- 支持中英文切换，通过前端界面选择语言
+- API 请求时传递 `locale` 参数（`zh-CN` 或 `en`）
+- 后端根据 locale 选择对应语言的 prompt 和 system message
+- 模型输出语言与用户选择一致
+- 代码位置：`lib/ai/prompts.ts` 中的 `buildAnalysisPrompt()` 和 `getSystemPrompt()`
 
 ### Sample Incident Scenarios
 Three stable demos are planned:
@@ -75,6 +83,10 @@ npm run lint             # Run ESLint
 npm test                 # Run tests
 npm test -- --testNamePattern="test name"  # Run single test
 ```
+
+## Shell Commands
+
+- 使用 `python` 而非 `python3`（Windows 环境下）
 
 ## Demo Requirements
 
